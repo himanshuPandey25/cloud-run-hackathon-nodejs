@@ -16,10 +16,6 @@ app.post('/', function (req, res) {
   let me = arena._links.self.href;
 
   
-  
-  array.forEach(element => {
-    
-  });
 
   const moves = ['F', 'T', 'L', 'R', 'T'];
   res.send(moves[Math.floor(Math.random() * moves.length)]);
