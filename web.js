@@ -30,6 +30,7 @@ app.post('/', function (req, res) {
 
   //const moves = ['F', 'T', 'L', 'R', 'T'];
   //res.send(moves[Math.floor(Math.random() * moves.length)]);
+  console.log("MOVE: " + move);
   res.send(move);
 });
 
@@ -40,6 +41,7 @@ let decideMove = (me, myData, arena) => {
   } else {
     lowCount = 0;
   }
+  console.log("LOW COUNT: " + lowCount);
   if (lowCount > 3 && prevLocation[0] == myData.x && prevLocation[1] == myData.y) {
     lowCount = 2;
     prevScore = myData.score;
@@ -63,7 +65,7 @@ let decideMove = (me, myData, arena) => {
   }
 
   let hitRange = getHitRange(myData, arena)
-
+  console.log("HIT RANGE " + hitRange);
   if (hitRange.length == 0) {
     prevScore = myData.score;
     prevLocation = [myData.x, myData.y]
@@ -85,20 +87,21 @@ let decideMove = (me, myData, arena) => {
     }
   }
   noHitCount++;
-  if(noHitCount > 7){
+  console.log("NO HIT: " + noHitCount);
+  if(noHitCount > 6){
     noHitCount = 5
     prevScore = myData.score;
     prevLocation = [myData.x, myData.y]
     let moves = ['L', 'R'];
     return moves[Math.floor(Math.random() * moves.length)];
   }
-  if (noHitCount >= 5) {
+  if (noHitCount >= 4) {
     hitCount = 0;
     prevScore = myData.score;
     prevLocation = [myData.x, myData.y]
     return 'F';
   }
-  if (noHitCount >= 3) {
+  if (noHitCount >= 2) {
     hitCount = 0;
     prevScore = myData.score;
     prevLocation = [myData.x, myData.y]
@@ -184,6 +187,7 @@ let inRange = (hitRange, player) => {
   let j = 0;
   for (; j < hitRange.length; j++) {
     if (hitRange[j][0] == player.x && hitRange[j][1] == player.y) {
+      console.log("PLAYER HIT " + player.x + " " + player.y);
       return true;
     }
   }
