@@ -9,7 +9,13 @@ app.get('/', function (req, res) {
 });
 
 app.post('/', function (req, res) {
-  console.log(req.body);
+  console.log(JSON.parse(req.body));
+    
+  let arena = req.body;
+
+  let me = arena._links.self.href;
+  console.log(me);
+
   const moves = ['F', 'T', 'L', 'R', 'T'];
   res.send(moves[Math.floor(Math.random() * moves.length)]);
 });
