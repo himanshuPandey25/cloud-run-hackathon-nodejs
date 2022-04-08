@@ -40,18 +40,18 @@ let decideMove = (me, myData, arena) => {
   } else {
     lowCount = 0;
   }
-  if (lowCount > 4 && prevLocation[0] == myData.x && prevLocation[1] == myData.y) {
-    lowCount = 3;
+  if (lowCount > 3 && prevLocation[0] == myData.x && prevLocation[1] == myData.y) {
+    lowCount = 2;
     prevScore = myData.score;
     prevLocation = [myData.x, myData.y]
     return 'R';
   }
-  if (lowCount >= 4) {
+  if (lowCount >= 3) {
     prevScore = myData.score;
     prevLocation = [myData.x, myData.y]
     return 'F';
   }
-  if (lowCount >= 3) {
+  if (lowCount >= 2) {
     prevScore = myData.score;
     prevLocation = [myData.x, myData.y]
     return changeDirection(myData, arena);
@@ -85,15 +85,20 @@ let decideMove = (me, myData, arena) => {
     }
   }
   noHitCount++;
-
-  if (noHitCount > 5) {
+  if(noHitCount > 7){
+    noHitCount = 5
+    prevScore = myData.score;
+    prevLocation = [myData.x, myData.y]
+    let moves = ['L', 'R'];
+    return moves[Math.floor(Math.random() * moves.length)];
+  }
+  if (noHitCount >= 5) {
     hitCount = 0;
-    noHitCount = 0;
     prevScore = myData.score;
     prevLocation = [myData.x, myData.y]
     return 'F';
   }
-  if (noHitCount > 3) {
+  if (noHitCount >= 3) {
     hitCount = 0;
     prevScore = myData.score;
     prevLocation = [myData.x, myData.y]
