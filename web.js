@@ -9,12 +9,12 @@ app.get('/', function (req, res) {
 });
 
 app.post('/', function (req, res) {
-  console.log(JSON.parse(req.body));
+  console.log(JSON.stringify(req.body));
     
   let arena = req.body;
 
   let me = arena._links.self.href;
-  console.log(me);
+  consol
 
   const moves = ['F', 'T', 'L', 'R', 'T'];
   res.send(moves[Math.floor(Math.random() * moves.length)]);
